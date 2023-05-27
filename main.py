@@ -16,18 +16,20 @@ from datetime import datetime
 
 d = datetime.now()
 d = d.strftime("%d_%m_%Y_%H%M%S")
-
+'''
 if platform == 'android':
     from android.storage import primary_external_storage_path
-    #dir = primary_external_storage_path()
+    dir = primary_external_storage_path()
     #download_dir_path = os.path.join(dir, 'Download') 
-
+    '''
     path_to_dcim = join(dirname(App.get_running_app()._user_data_dir), 'DCIM')
     print(f'DCIM PATH - {path_to_dcim}')
     
     storage_path = (path_to_dcim + '/kivy_recording.3gp')
-''' 
-    
+    '''
+    print(dir) 
+
+  
 
 Builder.load_string('''
 <AudioTool>
@@ -74,9 +76,9 @@ class MyRecorder:
         # create out recorder
         self.mRecorder = self.MediaRecorder()
         self.mRecorder.setAudioSource(self.AudioSource.MIC)
-        self.mRecorder.setOutputFormat(self.OutputFormat.THREE_GPP)
-        #self.mRecorder.setOutputFile('./testaudio.3gp')
-        self.mRecorder.setOutputFile(storage_file)
+        self.mRecorder.setOutputFormat(self.OutputFormat.MPEG_4)
+        self.mRecorder.setOutputFile('testaudio.mp4')
+        #self.mRecorder.setOutputFile(storage_file)
         #self.mRecorder.setOutputFile('/sdcard/MYAUDIO_{}.3gp'.format(d))
         self.mRecorder.setAudioEncoder(self.AudioEncoder.AMR_NB)
         self.mRecorder.prepare()
@@ -86,9 +88,7 @@ class MyRecorder:
 class AudioApp(App):
     def build(self):
         request_permissions([Permission.INTERNET, Permission.RECORD_AUDIO,Permission.READ_EXTERNAL_STORAGE,Permission.WRITE_EXTERNAL_STORAGE])
-        @property  # see https://www.programiz.com/python-programming/property
-        def storage(self):
-            return join(self.user_data_dir, 'testaudio.3gp')
+
         #data_dir = getattr(self, 'user_data_dir')
         #store = JsonStore(join(data_dir,'user.json'))
         return AudioTool()
