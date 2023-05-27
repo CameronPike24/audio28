@@ -16,19 +16,19 @@ from datetime import datetime
 
 d = datetime.now()
 d = d.strftime("%d_%m_%Y_%H%M%S")
-'''
+
 if platform == 'android':
     from android.storage import primary_external_storage_path
-    dir = primary_external_storage_path()
+    #dir = primary_external_storage_path()
     #download_dir_path = os.path.join(dir, 'Download') 
-    '''
-    path_to_dcim = join(dirname(App.get_running_app()._user_data_dir), 'DCIM')
-    print(f'DCIM PATH - {path_to_dcim}')
     
-    storage_path = (path_to_dcim + '/kivy_recording.3gp')
-    '''
-    print(dir) 
-
+    path_to_dcim = join(dirname(App.get_running_app()._user_data_dir), 'DCIM')
+    print(path_to_dcim)
+    
+    #storage_path = (path_to_dcim + '/kivy_recording.3gp')
+    
+    #print(dir) 
+'''
   
 
 Builder.load_string('''
@@ -88,7 +88,9 @@ class MyRecorder:
 class AudioApp(App):
     def build(self):
         request_permissions([Permission.INTERNET, Permission.RECORD_AUDIO,Permission.READ_EXTERNAL_STORAGE,Permission.WRITE_EXTERNAL_STORAGE])
-
+        
+        self.appdir = self.user_data_dir
+        print(self.appdir)
         #data_dir = getattr(self, 'user_data_dir')
         #store = JsonStore(join(data_dir,'user.json'))
         return AudioTool()
