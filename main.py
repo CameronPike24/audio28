@@ -63,10 +63,10 @@ Builder.load_string('''
  
 class MyRecorder:
     def __init__(self):
-        storage_file = App.get_running_app().storage
+        #storage_file = App.get_running_app().storage
         #get_app = App.get_running_app()
         #self.user_dir = get_app.getattr(self, 'user_data_dir') 
-        print(storage_file)
+        #print(storage_file)
         '''Recorder object To access Android Hardware'''
         self.MediaRecorder = autoclass('android.media.MediaRecorder')
         self.AudioSource = autoclass('android.media.MediaRecorder$AudioSource')
