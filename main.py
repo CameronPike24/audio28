@@ -61,6 +61,10 @@ Builder.load_string('''
  
 class MyRecorder:
     def __init__(self):
+        storage_file = App.get_running_app().storage
+        #get_app = App.get_running_app()
+        #self.user_dir = get_app.getattr(self, 'user_data_dir') 
+        print(storage_file)
         '''Recorder object To access Android Hardware'''
         self.MediaRecorder = autoclass('android.media.MediaRecorder')
         self.AudioSource = autoclass('android.media.MediaRecorder$AudioSource')
@@ -71,8 +75,8 @@ class MyRecorder:
         self.mRecorder = self.MediaRecorder()
         self.mRecorder.setAudioSource(self.AudioSource.MIC)
         self.mRecorder.setOutputFormat(self.OutputFormat.THREE_GPP)
-        self.mRecorder.setOutputFile('./testaudio.3gp')
-        #self.mRecorder.setOutputFile(storage_path)
+        #self.mRecorder.setOutputFile('./testaudio.3gp')
+        self.mRecorder.setOutputFile(storage_file)
         #self.mRecorder.setOutputFile('/sdcard/MYAUDIO_{}.3gp'.format(d))
         self.mRecorder.setAudioEncoder(self.AudioEncoder.AMR_NB)
         self.mRecorder.prepare()
@@ -82,6 +86,9 @@ class MyRecorder:
 class AudioApp(App):
     def build(self):
         request_permissions([Permission.INTERNET, Permission.RECORD_AUDIO,Permission.READ_EXTERNAL_STORAGE,Permission.WRITE_EXTERNAL_STORAGE])
+        @property  # see https://www.programiz.com/python-programming/property
+        def storage(self):
+            return join(self.user_data_dir, 'testaudio.3gp')
         #data_dir = getattr(self, 'user_data_dir')
         #store = JsonStore(join(data_dir,'user.json'))
         return AudioTool()
