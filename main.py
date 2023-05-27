@@ -11,7 +11,8 @@ from android.permissions import request_permissions,Permission,check_permission
 from kivy.utils import platform
 import os
 
-'''from datetime import datetime
+'''
+from datetime import datetime
 
 d = datetime.now()
 d = d.strftime("%d_%m_%Y_%H%M%S")
@@ -70,7 +71,7 @@ class MyRecorder:
         self.mRecorder = self.MediaRecorder()
         self.mRecorder.setAudioSource(self.AudioSource.MIC)
         self.mRecorder.setOutputFormat(self.OutputFormat.THREE_GPP)
-        self.mRecorder.setOutputFile('MYAUDIO.3gp')
+        self.mRecorder.setOutputFile('./testaudio.3gp')
         #self.mRecorder.setOutputFile(storage_path)
         #self.mRecorder.setOutputFile('/sdcard/MYAUDIO_{}.3gp'.format(d))
         self.mRecorder.setAudioEncoder(self.AudioEncoder.AMR_NB)
@@ -118,6 +119,7 @@ class AudioTool(BoxLayout):
     def startRecording(self, dt): #NEW start the recorder
         self.r = MyRecorder()
         self.r.mRecorder.start()
+        print("started recording")
     
     def stopRecording(self):
     
@@ -130,6 +132,7 @@ class AudioTool(BoxLayout):
         self.start_button.disabled = False
         self.stop_button.disabled = True #TUT 3
         self.switch.disabled = False #TUT 3 re enable the switch
+        print("stopped recording")
          
     def updateDisplay(self,dt):   
         if self.switch.active == False:
