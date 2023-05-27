@@ -8,6 +8,25 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.switch import Switch 
 from jnius import autoclass 
 from android.permissions import request_permissions,Permission,check_permission
+from kivy.utils import platform
+import os
+
+from datetime import datetime
+
+d = datetime.now()
+d = d.strftime("%d_%m_%Y_%H%M%S")
+
+if platform == 'android':
+    from android.storage import primary_external_storage_path
+    #dir = primary_external_storage_path()
+    #download_dir_path = os.path.join(dir, 'Download') 
+
+    path_to_dcim = join(dirname(App.get_running_app()._user_data_dir), 'DCIM')
+    print(f'DCIM PATH - {path_to_dcim}')
+    
+    storage_path = (path_to_dcim + '/kivy_recording.3gp')
+ 
+    
 
 Builder.load_string('''
 <AudioTool>
@@ -51,7 +70,9 @@ class MyRecorder:
         self.mRecorder = self.MediaRecorder()
         self.mRecorder.setAudioSource(self.AudioSource.MIC)
         self.mRecorder.setOutputFormat(self.OutputFormat.THREE_GPP)
-        self.mRecorder.setOutputFile('MYAUDIO.3gp')
+        #self.mRecorder.setOutputFile('MYAUDIO.3gp')
+        self.mRecorder.setOutputFile(storage_path)
+        #self.mRecorder.setOutputFile('/sdcard/MYAUDIO_{}.3gp'.format(d))
         self.mRecorder.setAudioEncoder(self.AudioEncoder.AMR_NB)
         self.mRecorder.prepare()
  
