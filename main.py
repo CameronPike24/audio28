@@ -11,7 +11,7 @@ from android.permissions import request_permissions,Permission,check_permission
 from kivy.utils import platform
 import os
 
-from datetime import datetime
+'''from datetime import datetime
 
 d = datetime.now()
 d = d.strftime("%d_%m_%Y_%H%M%S")
@@ -25,7 +25,7 @@ if platform == 'android':
     print(f'DCIM PATH - {path_to_dcim}')
     
     storage_path = (path_to_dcim + '/kivy_recording.3gp')
- 
+''' 
     
 
 Builder.load_string('''
@@ -70,8 +70,8 @@ class MyRecorder:
         self.mRecorder = self.MediaRecorder()
         self.mRecorder.setAudioSource(self.AudioSource.MIC)
         self.mRecorder.setOutputFormat(self.OutputFormat.THREE_GPP)
-        #self.mRecorder.setOutputFile('MYAUDIO.3gp')
-        self.mRecorder.setOutputFile(storage_path)
+        self.mRecorder.setOutputFile('MYAUDIO.3gp')
+        #self.mRecorder.setOutputFile(storage_path)
         #self.mRecorder.setOutputFile('/sdcard/MYAUDIO_{}.3gp'.format(d))
         self.mRecorder.setAudioEncoder(self.AudioEncoder.AMR_NB)
         self.mRecorder.prepare()
@@ -81,6 +81,8 @@ class MyRecorder:
 class AudioApp(App):
     def build(self):
         request_permissions([Permission.INTERNET, Permission.RECORD_AUDIO,Permission.READ_EXTERNAL_STORAGE,Permission.WRITE_EXTERNAL_STORAGE])
+        #data_dir = getattr(self, 'user_data_dir')
+        #store = JsonStore(join(data_dir,'user.json'))
         return AudioTool()
  
  
