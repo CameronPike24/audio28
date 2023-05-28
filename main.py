@@ -150,7 +150,7 @@ class AudioTool(BoxLayout):
         self.stop_button.disabled = True #TUT 3
         self.switch.disabled = False #TUT 3 re enable the switch
         print("stopped recording")
-        self.play(self)
+        self.play()
         
         
         
