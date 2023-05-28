@@ -11,6 +11,9 @@ from android.permissions import request_permissions,Permission,check_permission
 from kivy.utils import platform
 import os
 
+from android.storage import app_storage_path
+
+
 '''
 from datetime import datetime
 
@@ -88,12 +91,17 @@ class MyRecorder:
 class AudioApp(App):
     def build(self):
         request_permissions([Permission.INTERNET, Permission.RECORD_AUDIO,Permission.READ_EXTERNAL_STORAGE,Permission.WRITE_EXTERNAL_STORAGE])
+        settings_path = app_storage_path()
+        print("path")
+        print(settings_path)
         
-        self.appdir = self.user_data_dir
-        print(self.appdir)
+        #self.appdir = self.user_data_dir
+        #print(self.appdir)
         #data_dir = getattr(self, 'user_data_dir')
         #store = JsonStore(join(data_dir,'user.json'))
         return AudioTool()
+        
+     
  
  
  
