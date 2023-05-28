@@ -90,7 +90,7 @@ class MyRecorder:
  
 class AudioApp(App):
     def build(self):
-        request_permissions([Permission.INTERNET, Permission.RECORD_AUDIO,Permission.READ_EXTERNAL_STORAGE,Permission.WRITE_EXTERNAL_STORAGE])
+        request_permissions([Permission.INTERNET, Permission.RECORD_AUDIO,Permission.READ_EXTERNAL_STORAGE,Permission.WRITE_EXTERNAL_STORAGE,Permission.MANAGE_EXTERNAL_STORAGE])
         settings_path = app_storage_path()
         print("path")
         print(settings_path)
@@ -150,6 +150,27 @@ class AudioTool(BoxLayout):
         self.stop_button.disabled = True #TUT 3
         self.switch.disabled = False #TUT 3 re enable the switch
         print("stopped recording")
+        self.play(self)
+        
+        
+        
+    def play(self)
+        MediaPlayer = autoclass('android.media.MediaPlayer')
+        AudioManager = autoclass('android.media.AudioManager')
+
+        self.sound = MediaPlayer()
+        #self.sound.setDataSource(yourDataSource) #you can provide any data source, if its on the devie then the file path, or its url if you are playing online
+        self.sound.setDataSource(testaudio.mp4) 
+        self.sound.prepare()
+        self.sound.setLooping(False) #you can set it to true if you want to loop
+        self.sound.start()
+        # You can also use the following according to your needs
+        #self.sound.pause()
+        #self.sound.stop()
+        #self.sound.release()
+        #self.sound.getCurrentPosition()
+        #self.sound.getDuration()       
+        
          
     def updateDisplay(self,dt):   
         if self.switch.active == False:
