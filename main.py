@@ -154,7 +154,7 @@ class AudioTool(BoxLayout):
         
         
         
-    def play(self)
+    def play(self):
         MediaPlayer = autoclass('android.media.MediaPlayer')
         AudioManager = autoclass('android.media.AudioManager')
 
